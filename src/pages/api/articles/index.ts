@@ -1,38 +1,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Parser from "rss-parser";
+import { Article, shuffle, urlMap } from "@/const";
+import RequestCache from "@/lib/RequestCache";
 
-const parser = new Parser();
-
-function generateTestResult() {
-  return [...Array(30)].map((_, i) => {
-    return {
-      title: `test${i}`,
-      link: "http://localhost",
-      description: `${i}${i}${i}${i}${i}this is test.this is test.this is test.this is test.this is test.this is test.this is test.this is test.this is test.`,
-    };
-  });
-}
-
-async function generateStaticRSS() {
-  const feed = await parser.parseURL(
-    "https://news.google.com/rss?hl=ja&gl=JP&ceid=JP:ja"
-  );
-  let rst = [];
-  feed.items.forEach((item) => {
-    rst.push({
-      title: item.title,
-      description: item.contentSnippet,
-      link: item.link,
-    });
-  });
-  return rst;
-}
+let reqCache = new RequestCache<string, Article[]>(1000 * 60 * 10);
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    return res.status(200).json(await generateStaticRSS());
+    const list = shuffle([...urlMap.google, ...urlMap.yahoo]);
+    const url = list[0];
+    return res.status(200).json(await reqCache.request(url));
   }
 }
