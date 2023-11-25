@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Article, shuffle, urlMap } from "@/const";
-import RequestCache from "@/lib/RequestCache";
+import RSSRequestCache from "@/lib/RSSRequestCache";
+import RSSParserWrapper from "@/lib/RSSParserWrapper";
 
-let reqCache = new RequestCache<string, Article[]>(1000 * 60 * 10);
+const reqCache = new RSSRequestCache(1000 * 60 * 10, new RSSParserWrapper());
 
 export default async function handler(
   req: NextApiRequest,
