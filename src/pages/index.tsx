@@ -1,11 +1,6 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import styles from "./index.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
 
 interface Article {
   title: string;
@@ -71,8 +66,9 @@ export default function Home() {
                 href={article.link}
                 className={styles.newsLink}
                 target="_blank"
+                key={index}
               >
-                <div key={index} className={styles.newsItem}>
+                <div className={styles.newsItem}>
                   <h2 className={styles.newsTitle}>{article.title}</h2>
                   <p className={styles.newsDescription}>
                     {article.description}
