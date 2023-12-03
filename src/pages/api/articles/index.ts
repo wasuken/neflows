@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Article, shuffle, urlMap } from "@/const";
+import { shuffle, urlMap } from "@/const";
 import RSSRequestCache from "@/lib/RSSRequestCache";
 import RSSParserWrapper from "@/lib/RSSParserWrapper";
 
