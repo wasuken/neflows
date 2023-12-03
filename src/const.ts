@@ -26,4 +26,5 @@ interface Article {
   description: string;
 }
 
-export { Article, shuffle, urlMap };
+export { shuffle, urlMap };
+export type { Article };
