@@ -18,13 +18,15 @@ const autoScroll = () => {
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  const [interv, setInterv] = useState(null);
+  const [interv, setInterv] = useState<ReturnType<typeof setInterval> | null>(
+    null
+  );
   const loader = (
     <div className={styles.loader} key={0}>
       Loading ...
     </div>
   );
-  const loadMore = async (page) => {
+  const loadMore = async () => {
     const res = await fetch(`/api/articles`);
     const data = await res.json();
 
