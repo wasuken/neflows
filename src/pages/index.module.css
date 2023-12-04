@@ -50,12 +50,11 @@
 .linkButton {
   background-color: transparent;
   border: none;
-  color: #007bff;
   padding: 0.5rem 1rem;
   text-align: center;
   text-decoration: underline;
   display: inline-block;
-  font-size: 16px;
+  font-size: 32px;
   cursor: pointer;
   transition: color 0.3s;
 }

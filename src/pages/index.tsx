@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroller";
 import styles from "./index.module.css";
+import { FaPauseCircle, FaPlayCircle } from "react-icons/fa";
 
 interface Article {
   title: string;
@@ -55,9 +56,9 @@ export default function Home() {
   return (
     <div className={styles.main}>
       <div className={styles.sidebar}>
-        <h2>sidebar</h2>
+        <h2>再生/停止</h2>
         <button className={styles.linkButton} onClick={handlePauseButtonClick}>
-          {interv === null ? "restart" : "pause"}
+          {interv === null ? <FaPlayCircle /> : <FaPauseCircle />}
         </button>
       </div>
       <div className={styles.articleArea}>
