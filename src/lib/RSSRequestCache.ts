@@ -17,9 +17,24 @@ export default class RSSRequestCache {
     this.ttl = ttl;
     this.parser = rssParser;
   }
+  search(query: string) {
+    let rst: Article[] = [];
+    console.log("debug", this.cache.size);
+    for (const key of this.cache.keys()) {
+      const items = this.cache.get(key);
+      if (items) {
+        const fItems = items.value.filter((item: Article) =>
+          (item.title + " " + item.description).includes(query)
+        );
+        rst = [...rst, ...fItems];
+      }
+    }
+    console.log("debug2", rst);
+    return rst;
+  }
   // よびだすのはこいつだけ
   async request(url: string) {
-    console.log("debug", this.cache.keys());
+    // console.log("debug", this.cache.size);
     if (this.cache.has(url)) {
       console.log("debug", "use cache");
       return this.get(url);
